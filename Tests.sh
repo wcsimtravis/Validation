@@ -41,7 +41,7 @@ then
         then
 	    i=$(expr 1 + $i)
             name=$(echo $line | cut -f1 -d' ')
-            echo "  <td bgcolor=\""$TRAVIS_COMMIT"Pass"$i"\"><a href='"$TRAVIS_COMMIT"/"$TRAVIS_COMMIT"Link"$1"'>"$TRAVIS_COMMIT"Text"$1$"</td>" >> $ValidationPath/Webpage/results.html;
+            echo "  <td bgcolor=\""$TRAVIS_COMMIT"Pass"$i"\"><a href='"$TRAVIS_COMMIT"/"$TRAVIS_COMMIT"Link"$i"'>"$TRAVIS_COMMIT"Text"$i$"</td>" >> $ValidationPath/Webpage/results.html;
 	    
         fi
 	
@@ -101,7 +101,7 @@ do
 		
 		
 		mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-		head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$time: | sed s:$TRAVIS_COMMIT"Link"$1:$TRAVIS_COMMIT/log$1: > $ValidationPath/Webpage/results.html
+		head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$time: | sed s:$TRAVIS_COMMIT"Link"$1:log$1: > $ValidationPath/Webpage/results.html
 		
 	    fi	
 #############################################################
