@@ -41,7 +41,7 @@ then
         then
 	    i=$(expr 1 + $i)
             name=$(echo $line | cut -f1 -d' ')
-            echo "  <td bgcolor=\""$TRAVIS_COMMIT"Pass"$i"\"><a href='"$TRAVIS_COMMIT"/"$TRAVIS_COMMIT"File"$1"'>"$TRAVIS_COMMIT"Time"$1$"</td>" >> $ValidationPath/Webpage/results.html;
+            echo "  <td bgcolor=\""$TRAVIS_COMMIT"Pass"$i"\"><a href='"$TRAVIS_COMMIT"/"$TRAVIS_COMMIT"Link"$1"'>"$TRAVIS_COMMIT"Text"$1$"</td>" >> $ValidationPath/Webpage/results.html;
 	    
         fi
 	
@@ -101,19 +101,65 @@ do
 		
 		
 		mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-		head -49 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Time"$i:$time: | sed s:$TRAVIS_COMMIT"File"$1:log$1: > $ValidationPath/Webpage/results.html
+		head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$time: | sed s:$TRAVIS_COMMIT"Link"$1:$TRAVIS_COMMIT/log$1: > $ValidationPath/Webpage/results.html
 		
+	    fi	
+#############################################################
+	    
+################## File Test #######################
+
+            if [ $test == "FileTest"  ]
+            then
+		
+                if [ ! -e $var1 ]
+                then
+                    pass=#FF0000
+		    text="Not present"
+                else
+                    pass=#00FF00
+		    text="Present"
+                fi
+		
+		file="index.html"
+		
+                mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
+                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$text: | sed s:$TRAVIS_COMMIT"Link"$1:$file: > $ValidationPath/Webpage/results.html
+	    fi
 #############################################################
 		
+################## Physics Validation #######################
+	    
+	    
+	    if [ $test == "PhysicsValidation" ]
+            then
 		
+		/usr/bin/time -p --output=timetest $var1 $var2
+		time=`more timetest |grep sys |  cut -f2 -d' '`
 		
+		$ValidationPath/Compare/compareroot $ValidationPath/Webpage/$TRAVIS_COMMIT/ $name $var3
 		
+
+		if [ $? -ne 0 ]
+		then
+                    pass=#FF0000
+                    time="Failed"
+		else
+                    pass=#00FF00
+		fi
 		
+                mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
+                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$time: | sed s:$TRAVIS_COMMIT"Link"$1:$TRAVIS_COMMIT/index.html: > $ValidationPath/Webpage/results.html
 		
 	    fi
+#############################################################		
+	    
+	    
 	    
 	fi
+	
     fi
-
+    
+    
 done < $ValidationPath/tests.txt
 
+#############################################################
