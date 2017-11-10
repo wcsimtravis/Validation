@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source $HYPERKDIR/env-WCSim.sh
 export WCSim=$HYPERKDIR/WCSim
 export LD_LIBRARY_PATH=$WCSim:$LD_LIBRARY_PATH
 
