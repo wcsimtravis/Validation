@@ -10,6 +10,7 @@ i=$(expr $i + 1)
 if [ $i -eq $1 ]
 then
 $WCSim/exe/bin/Linux-g++/WCSim $file
+$ValidationPath/Generate/daq_readfilemain *.root
 fi
 
 done

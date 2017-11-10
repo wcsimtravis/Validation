@@ -136,7 +136,7 @@ do
 		/usr/bin/time -p --output=timetest $var1 $var2
 		time=`more timetest |grep sys |  cut -f2 -d' '`
 		
-		$ValidationPath/Compare/compareroot $ValidationPath/Webpage/$TRAVIS_COMMIT/ $name".root" $var3
+		$ValidationPath/Compare/compareroot $ValidationPath/Webpage/$TRAVIS_COMMIT/ "analysed_"$name".root" $var3
 		
 
 		if [ $? -ne 0 ]

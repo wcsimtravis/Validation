@@ -10,4 +10,4 @@
 #
 #
 WCSim_build BuildTest /root/Validation/build.sh /root/HyperK/WCSim/exe/bin/Linux-g++/WCSim
-simple_test PhysicsValidation /root/Validation/Generate/Generate.sh 1 /root/Validation/Compare/Reference/simple_test.root
+simple_test PhysicsValidation /root/Validation/Generate/Generate.sh 1 /root/Validation/Compare/Reference/analysed_simple_test.root
