@@ -54,7 +54,7 @@ int daq_readfile(char *filename=NULL, bool verbose=false, Long64_t max_nevents =
     file = new TFile("../wcsim.root","read");
   }else{
     std::stringstream tmp;
-    tmp<<"../"<<filename;
+    tmp<<"./"<<filename;
     file = new TFile(tmp.str().c_str(),"read");
   }
   //std::cout<<"debug 2"<<std::endl;
