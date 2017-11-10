@@ -88,7 +88,7 @@ do
             if [ $test == "BuildTest"  ]
             then
 		
-		/usr/bin/time --output=timetest $var1 > $ValidationPath/Webpage/$TRAVIS_COMMIT>log$1
+		/usr/bin/time --output=timetest $var1 > $ValidationPath/Webpage/$TRAVIS_COMMIT"log"$1
 		time=`more timetest |grep sys |  cut -f2 -d' '`
 		
 		if [ ! -e $var2 ]
