@@ -101,7 +101,7 @@ do
 		
 		
 		mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-		more $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Time"$i:$time: | sed s:$TRAVIS_COMMIT"File"$1:log$1: > $ValidationPath/Webpage/results.html
+		head -49 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Time"$i:$time: | sed s:$TRAVIS_COMMIT"File"$1:log$1: > $ValidationPath/Webpage/results.html
 		
 #############################################################
 		
