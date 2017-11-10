@@ -9,7 +9,7 @@ i=$(expr $i + 1)
 
 if [ $i -eq $1 ]
 then
-./WCSim $file
+$WCSim/exe/bin/Linux-g++/WCSim $file
 fi
 
 done
