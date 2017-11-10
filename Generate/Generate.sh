@@ -1,5 +1,11 @@
 #!/bin/bash
 
+source $HYPERKDIR/env-WCSim.sh
+export WCSim=$HYPERKDIR/WCSim
+export LD_LIBRARY_PATH=$WCSim:$LD_LIBRARY_PATH
+
+g++ $ValidationPath/Generate/daq_readfilemain.C -o $ValidationPath/Generate/daq_readfilemain `root-config --libs --cflags` -L $WCSim -lWCSimRoot -I $WCSim/include
+
 i=0
 
 for file in `ls $ValidationPath/Generate/macReference/*.mac`
