@@ -9,4 +9,4 @@
 # Name PhysicsValidation nameonweb referencefile newfile
 #
 #
-WCSim_build BuildTest $ValidationPath/build.sh $WCSim/exe/bin/Linux-g++/WCSim
+WCSim_build BuildTest /root/Validation/build.sh /root/HyperK/WCSim/exe/bin/Linux-g++/WCSim
