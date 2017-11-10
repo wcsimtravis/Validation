@@ -39,7 +39,7 @@ then
 	
         if [ ${line::1} != "#" ]
         then
-	    i=$(expr $i +1)
+	    i=$(expr 1 + $i)
             name=$(echo $line | cut -f1 -d' ')
             echo "  <td bgcolor=\""$TRAVIS_COMMIT"Pass"$i"\"><a href='"$TRAVIS_COMMIT"/"$TRAVIS_COMMIT"File"$1"'>"$TRAVIS_COMMIT"Time"$1$"</td>" >> $ValidationPath/Webpage/results.html;
 	    
