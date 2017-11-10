@@ -67,10 +67,10 @@ i=0
 
 while read line
 do
-
+    
     if [ ${line::1} != "#" ]
     then
-
+	
         name=$(echo $line | cut -f1 -d' ')
         test=$(echo $line | cut -f2 -d' ')
         var1=$(echo $line | cut -f3 -d' ')
@@ -84,35 +84,36 @@ do
 	then
 	    
 ################## Build Test #######################
-
-        if [ $test == "BuildTest"  ]
-        then
-
-	    /usr/bin/time --output=timetest $var1 > $ValidationPath/Webpage/$TRAVIS_COMMIT>log$1
-	    time=`more timetest |grep sys |  cut -f2 -d' '`
-
-            if [ ! -e $var2 ]
+	    
+            if [ $test == "BuildTest"  ]
             then
-                pass=#FF0000
-               
-            else
-                pass=#00FF00
-            fi
-
-
-	    mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-            more $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Time"$i:$time: | sed s:$TRAVIS_COMMIT"File"$1:log$1: > $ValidationPath/Webpage/results.html
-
+		
+		/usr/bin/time --output=timetest $var1 > $ValidationPath/Webpage/$TRAVIS_COMMIT>log$1
+		time=`more timetest |grep sys |  cut -f2 -d' '`
+		
+		if [ ! -e $var2 ]
+		then
+                    pass=#FF0000
+		    
+		else
+                    pass=#00FF00
+		fi
+		
+		
+		mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
+		more $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Time"$i:$time: | sed s:$TRAVIS_COMMIT"File"$1:log$1: > $ValidationPath/Webpage/results.html
+		
 #############################################################
-
-
-
-
-
-
+		
+		
+		
+		
+		
+		
+	    fi
+	    
 	fi
-	
     fi
-    
+
 done < $ValidationPath/tests.txt
 
