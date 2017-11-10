@@ -25,7 +25,7 @@ then
 	    
 	fi
 	
-    done < tests.txt
+    done < $ValidationPath/tests.txt
     
     echo " </tr> 
  <tr>
@@ -45,7 +45,7 @@ then
 	    
         fi
 	
-    done < tests.txt
+    done < $ValidationPath/tests.txt
     
     echo " </tr>
  " >> $ValidationPath/Webpage/results.html
@@ -114,5 +114,5 @@ do
 	
     fi
     
-done < tests.txt
+done < $ValidationPath/tests.txt
 
