@@ -1,0 +1,12 @@
+# list of tests for the NBRTT to undertake and display on webpage
+#
+# Format of test:
+#
+# Name TestType Imput1 Input2 ........
+#
+# Name BuildTest build_script output_exe
+# Name FileTest pathtofile
+# Name PhysicsValidation nameonweb referencefile newfile
+#
+#
+WCSim_build BuildTest $ValidationPath/build.sh $WCSim/exe/bin/Linux-g++/WCSim
