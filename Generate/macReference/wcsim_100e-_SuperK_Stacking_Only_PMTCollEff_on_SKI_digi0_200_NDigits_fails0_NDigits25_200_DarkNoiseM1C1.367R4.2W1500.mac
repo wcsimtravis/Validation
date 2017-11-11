@@ -20,7 +20,6 @@
 /DAQ/TriggerNDigits/AdjustForNoise true
 /DAQ/TriggerNDigits/PreTriggerWindow -400
 /DAQ/TriggerNDigits/PostTriggerWindow +950
-/DAQ/Construct 
 /DarkRate/SetDarkRate 4.2
 /DarkRate/SetConvert 1.367
 /DarkRate/SetDarkMode 1
