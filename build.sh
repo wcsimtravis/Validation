@@ -1,5 +1,3 @@
 #!/bin/bash
 
-make clean
-make rootcint
-make
+make clean && make rootcint && make

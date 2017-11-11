@@ -1,4 +1,4 @@
-0;136;0c#!/bin/bash
+#!/bin/bash
 
 cd $ValidationPath/Compare
 g++ compareroot.cpp -o compareroot `root-config --libs --cflags`
@@ -8,6 +8,8 @@ cd /root/HyperK/WCSim
 
 echo showing travis commit
 echo ${TRAVIS_COMMIT}
+
+ret=0
 
 ##################### Setting up new table entry #############################
 
@@ -97,6 +99,7 @@ do
             then
 		
 		/usr/bin/time -p --output=timetest $var1 > $ValidationPath/Webpage/${TRAVIS_COMMIT}/"log"$1
+		ret=${?} 
 		time=`more timetest |grep sys |  cut -f2 -d' '`
 		
 		if [ ! -e $var2 ]
@@ -123,9 +126,11 @@ do
                 then
                     pass=#FF0000
 		    text="Not present"
+		    ret=0
                 else
                     pass=#00FF00
 		    text="Present"
+		    ret=1
                 fi
 		
 		file="index.html"
@@ -151,8 +156,10 @@ do
 		then
                     pass=#FF0000
                     time="Failed"
+		    ret=1
 		else
                     pass=#00FF00
+		    ret=0
 		fi
 		
                 mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
@@ -195,3 +202,4 @@ git push https://brichards64:$GitHubToken@github.com/wcsimtravis/WCSim
 
 #git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" gh-pages > /dev/null 2>&1
 
+exit $ret
