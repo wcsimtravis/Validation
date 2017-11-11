@@ -1,4 +1,4 @@
-#!/bin/bash
+0;136;0c#!/bin/bash
 
 cd $ValidationPath/Compare
 g++ compareroot.cpp -o compareroot `root-config --libs --cflags`
@@ -185,7 +185,7 @@ head -100000000 results.html >> index.html
 head -100000000 footer.html >>index.html
 
 git add --all
-git commit -a -m`\'${TRAVIS_COMMIT}\'`
+git commit -a -m'Travis update'
 #git push
 #> /dev/null 2>/dev/null
 
