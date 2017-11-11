@@ -2,9 +2,9 @@
 
 cd $ValidationPath/Compare
 g++ compareroot.cpp -o compareroot `root-config --libs --cflags`
-cd -
+cd ../
 git clone https://github.com/wcsimtravis/WCSim.git -b gh-pages ./Webpage
-
+cd /root/HyperK/
 
 ##################### Setting up new table entry #############################
 
