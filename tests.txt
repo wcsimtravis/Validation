@@ -10,4 +10,5 @@
 #
 #
 WCSim_build BuildTest /root/Validation/build.sh /root/HyperK/WCSim/exe/bin/Linux-g++/WCSim
-simple_test PhysicsValidation /root/Validation/Generate/Generate.sh 1 /root/Validation/Compare/Reference/analysed_simple_test.root
+#simple_test PhysicsValidation /root/Validation/Generate/Generate.sh /root/Validation/Generate/macReference/simple_test.mac /root/Validation/Compare/Reference/analysed_simple_test.root
+100e PhysicsValidation /root/Validation/Generate/Generate.sh /root/Validation/Generate/macReference/wcsim_100e-_SuperK_Stacking_Only_PMTCollEff_on_SKI_digi0_200_NDigits_fails0_NDigits25_200_DarkNoiseM1C1.367R4.2W1500.mac /root/Validation/Compare/Reference/analysed_wcsim_100e-_SuperK_Stacking_Only_PMTCollEff_on_SKI_digi0_200_NDigits_fails0_NDigits25_200_DarkNoiseM1C1.367R4.2W1500.root
