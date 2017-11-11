@@ -106,18 +106,18 @@ RUN export G4LIB
 ADD env-WCSim.sh $HYPERKDIR/
 
 ###Adding Validation
-RUN cd /root \
-    && git clone https://github.com/wcsimtravis/Validation.git
+#RUN cd /root \
+#    && git clone https://github.com/wcsimtravis/Validation.git
 
-ENV ValidationPath /root/Validation
-RUN export ValidationPath
+#ENV ValidationPath /root/Validation
+#RUN export ValidationPath
 
-RUN cd $ValidationPath/Compare \
-    && source $HYPERKDIR/env-WCSim.sh \
-    && g++ compareroot.cpp -o compareroot `root-config --libs --cflags` 
+#RUN cd $ValidationPath/Compare \
+#    && source $HYPERKDIR/env-WCSim.sh \
+#    && g++ compareroot.cpp -o compareroot `root-config --libs --cflags` 
 
-ENV LD_LIBRARY_PATH=$WCSIM:$LD_LIBRARAY_PATH
-RUN export LD_LIBRARAY_PATH
+#ENV LD_LIBRARY_PATH=$WCSIM:$LD_LIBRARAY_PATH
+#RUN export LD_LIBRARAY_PATH
 
 
 

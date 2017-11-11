@@ -1,5 +1,12 @@
 #!/bin/bash
 
+cd /root
+git clone https://github.com/wcsimtravis/Validation.git
+cd $ValidationPath/Compare
+g++ compareroot.cpp -o compareroot `root-config --libs --cflags`
+cd ..
+git clone https://github.com/wcsimtravis/WCSim.git -b gh-pages ./Webpage
+
 
 ##################### Setting up new table entry #############################
 
@@ -162,4 +169,27 @@ do
     
 done < $ValidationPath/tests.txt
 
+
+
 #############################################################
+
+############################## update webpage ################
+
+cd $ValidationPath/Webpage
+
+git pull
+
+head -100000000 header.html > index.html
+head -100000000 results.html >> index.html
+head -100000000 footer.html >>index.html
+
+git add -all
+
+#git push
+#> /dev/null 2>/dev/null
+
+git push https://brichards64:$GitHubToken@github.com/wcsimtravis/WCSim  gh-pages > /dev/null 2>/dev/null
+
+
+#git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" gh-pages > /dev/null 2>&1
+
