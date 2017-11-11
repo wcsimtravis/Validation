@@ -6,6 +6,9 @@ cd ../
 git clone https://github.com/wcsimtravis/WCSim.git -b gh-pages ./Webpage
 cd /root/HyperK/WCSim
 
+echo showing travis commit
+echo ${TRAVIS_COMMIT}
+
 ##################### Setting up new table entry #############################
 
 if [ $1 -eq 1 ]
