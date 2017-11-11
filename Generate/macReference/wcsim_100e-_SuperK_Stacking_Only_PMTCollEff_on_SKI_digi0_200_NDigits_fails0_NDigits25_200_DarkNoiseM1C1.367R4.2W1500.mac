@@ -1,7 +1,6 @@
 /run/verbose 0 
 /tracking/verbose 0 
 /hits/verbose 0 
-/mygen/generator normal 
 /gun/particle e-
 /gun/energy 100 MeV 
 /gun/direction 1 0 0
