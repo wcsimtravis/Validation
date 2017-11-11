@@ -185,7 +185,7 @@ head -100000000 results.html >> index.html
 head -100000000 footer.html >>index.html
 
 git add --all
-
+git commit -a -m`\'${TRAVIS_COMMIT}\'`
 #git push
 #> /dev/null 2>/dev/null
 
