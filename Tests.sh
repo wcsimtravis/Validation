@@ -189,7 +189,8 @@ git add --all
 #git push
 #> /dev/null 2>/dev/null
 
-git push https://brichards64:$GitHubToken@github.com/wcsimtravis/WCSim  gh-pages > /dev/null 2>/dev/null
+git push https://brichards64:$GitHubToken@github.com/wcsimtravis/WCSim  
+#> /dev/null 2>/dev/null
 
 
 #git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" gh-pages > /dev/null 2>&1
