@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd /root
-git clone https://github.com/wcsimtravis/Validation.git
 cd $ValidationPath/Compare
 g++ compareroot.cpp -o compareroot `root-config --libs --cflags`
 cd ..
