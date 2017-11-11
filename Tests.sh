@@ -2,7 +2,7 @@
 
 cd $ValidationPath/Compare
 g++ compareroot.cpp -o compareroot `root-config --libs --cflags`
-cd ..
+cd -
 git clone https://github.com/wcsimtravis/WCSim.git -b gh-pages ./Webpage
 
 
@@ -34,8 +34,8 @@ then
     
     echo " </tr> 
  <tr>
- <td>"$TRAVIS_COMMIT"</td>
- <td>"$TRAVIS_COMMIT_MESSAGE"</td>">> $ValidationPath/Webpage/results.html;
+ <td>"${TRAVIS_COMMIT}"</td>
+ <td>"${TRAVIS_COMMIT_MESSAGE}"</td>">> $ValidationPath/Webpage/results.html;
     
     
     i=0
@@ -46,7 +46,7 @@ then
         then
 	    i=$(expr 1 + $i)
             name=$(echo $line | cut -f1 -d' ')
-            echo "  <td bgcolor=\""$TRAVIS_COMMIT"Pass"$i"\"><a href='"$TRAVIS_COMMIT"Link"$i"'>"$TRAVIS_COMMIT"Text"$i$"</td>" >> $ValidationPath/Webpage/results.html;
+            echo "  <td bgcolor=\""${TRAVIS_COMMIT}"Pass"$i"\"><a href='"${TRAVIS_COMMIT}"Link"$i"'>"${TRAVIS_COMMIT}"Text"$i$"</td>" >> $ValidationPath/Webpage/results.html;
 	    
         fi
 	
@@ -58,7 +58,7 @@ then
 
     head -49 $ValidationPath/Webpage/results.html.old >>$ValidationPath/Webpage/results.html
     
-    mkdir $ValidationPath/Webpage/$TRAVIS_COMMIT
+    mkdir $ValidationPath/Webpage/${TRAVIS_COMMIT}
     
 fi
 #########################################################################################
@@ -93,7 +93,7 @@ do
             if [ $test == "BuildTest"  ]
             then
 		
-		/usr/bin/time -p --output=timetest $var1 > $ValidationPath/Webpage/$TRAVIS_COMMIT/"log"$1
+		/usr/bin/time -p --output=timetest $var1 > $ValidationPath/Webpage/${TRAVIS_COMMIT}/"log"$1
 		time=`more timetest |grep sys |  cut -f2 -d' '`
 		
 		if [ ! -e $var2 ]
@@ -106,7 +106,7 @@ do
 		
 		
 		mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-		head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$time: | sed s:$TRAVIS_COMMIT"Link"$1:$TRAVIS_COMMIT/log$1: > $ValidationPath/Webpage/results.html
+		head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/log$1: > $ValidationPath/Webpage/results.html
 		
 	    fi	
 #############################################################
@@ -128,7 +128,7 @@ do
 		file="index.html"
 		
                 mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$text: | sed s:$TRAVIS_COMMIT"Link"$1:$file: > $ValidationPath/Webpage/results.html
+                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$text: | sed s:${TRAVIS_COMMIT}"Link"$1:$file: > $ValidationPath/Webpage/results.html
 	    fi
 #############################################################
 		
@@ -141,7 +141,7 @@ do
 		/usr/bin/time -p --output=timetest $var1 $var2
 		time=`more timetest |grep sys |  cut -f2 -d' '`
 		
-		$ValidationPath/Compare/compareroot $ValidationPath/Webpage/$TRAVIS_COMMIT/ "analysed_"$name".root" $var3
+		$ValidationPath/Compare/compareroot $ValidationPath/Webpage/${TRAVIS_COMMIT}/ "analysed_"$name".root" $var3
 		
 
 		if [ $? -ne 0 ]
@@ -153,7 +153,7 @@ do
 		fi
 		
                 mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:$TRAVIS_COMMIT"Pass"$1:$pass: | sed s:$TRAVIS_COMMIT"Text"$i:$time: | sed s:$TRAVIS_COMMIT"Link"$1:$TRAVIS_COMMIT/index.html: > $ValidationPath/Webpage/results.html
+                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/index.html: > $ValidationPath/Webpage/results.html
 		
 	    fi
 #############################################################		
@@ -181,7 +181,7 @@ head -100000000 header.html > index.html
 head -100000000 results.html >> index.html
 head -100000000 footer.html >>index.html
 
-git add -all
+git add --all
 
 #git push
 #> /dev/null 2>/dev/null
