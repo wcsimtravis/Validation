@@ -147,19 +147,27 @@ do
             then
 		
 		/usr/bin/time -p --output=timetest $var1 $var2
-		time=`more timetest |grep sys |  cut -f2 -d' '`
-		
-		$ValidationPath/Compare/compareroot $ValidationPath/Webpage/${TRAVIS_COMMIT}/ "analysed_"$name".root" $var3
-		
 
 		if [ $? -ne 0 ]
-		then
-                    pass=#FF0000
+                then
+		    pass=#FF0000
                     time="Failed"
-		    ret=1
+                    ret=1
 		else
-                    pass=#00FF00
-		    ret=0
+		    time=`more timetest |grep sys |  cut -f2 -d' '`
+		    
+		    $ValidationPath/Compare/compareroot $ValidationPath/Webpage/${TRAVIS_COMMIT}/ "analysed_"$name".root" $var3
+		    
+		    
+		    if [ $? -ne 0 ]
+		    then
+			pass=#FF0000
+			time="Failed"
+			ret=1
+		    else
+			pass=#00FF00
+			ret=0
+		    fi
 		fi
 		
                 mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
