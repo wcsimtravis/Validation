@@ -72,6 +72,7 @@ then
         then
             i=$(expr 1 + $i)
 	    mkdir $ValidationPath/Webpage/${TRAVIS_COMMIT}/$i
+	    echo placeholder > $ValidationPath/Webpage/${TRAVIS_COMMIT}/$i/placeholder
         fi
 
     done < $ValidationPath/tests.txt
