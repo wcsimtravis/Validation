@@ -62,7 +62,7 @@ then
 
 
     head -300 $ValidationPath/Webpage/results.html.old >>$ValidationPath/Webpage/results.html.new
-    
+    cp $ValidationPath/Webpage/results.html.new $ValidationPath/Webpage/results.html
     mkdir $ValidationPath/Webpage/${TRAVIS_COMMIT}
     
 fi
