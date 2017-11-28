@@ -233,7 +233,7 @@ cd $ValidationPath/Webpage
 git pull
 
 head -100000000 header.html > index.html
-cp results.html.new results.html
+mv results.html.new results.html
 head -100000000 results.html >> index.html
 head -100000000 footer.html >>index.html
 
