@@ -21,7 +21,7 @@ then
             <tr>
             <th scope='col'><div align='center'>Commit ID</div></th>
             <th scope='col'><div align='center'>Description</div></th>
-" >$ValidationPath/Webpage/results.htnl.new;
+" >$ValidationPath/Webpage/results.html.new;
     
     
     while read line
@@ -31,7 +31,7 @@ then
 	then
 	    
             name=$(echo $line | cut -f1 -d' ')
-	    echo "  <th scope='col'><div align='center'>"$name"</div></th>" >> $ValidationPath/Webpage/results.htnl.new;
+	    echo "  <th scope='col'><div align='center'>"$name"</div></th>" >> $ValidationPath/Webpage/results.html.new;
 	    
 	fi
 	
@@ -40,7 +40,7 @@ then
     echo " </tr> 
  <tr>
  <td>"${TRAVIS_COMMIT}"</td>
- <td>"${TRAVIS_COMMIT_MESSAGE}"</td>">> $ValidationPath/Webpage/results.htnl.new;
+ <td>"${TRAVIS_COMMIT_MESSAGE}"</td>">> $ValidationPath/Webpage/results.html.new;
     
     
     i=0
@@ -51,14 +51,14 @@ then
         then
 	    i=$(expr 1 + $i)
             name=$(echo $line | cut -f1 -d' ')
-            echo "  <td bgcolor=\""${TRAVIS_COMMIT}"Pass"$i"\"><a href='"${TRAVIS_COMMIT}"Link"$i"'>"${TRAVIS_COMMIT}"Text"$i$"</td>" >> $ValidationPath/Webpage/results.htnl.new;
+            echo "  <td bgcolor=\""${TRAVIS_COMMIT}"Pass"$i"\"><a href='"${TRAVIS_COMMIT}"Link"$i"'>"${TRAVIS_COMMIT}"Text"$i$"</td>" >> $ValidationPath/Webpage/results.html.new;
 	    
         fi
 	
     done < $ValidationPath/tests.txt
     
     echo " </tr>
- " >> $ValidationPath/Webpage/results.htnl.new
+ " >> $ValidationPath/Webpage/results.html.new
 
 
     head -300 $ValidationPath/Webpage/results.html.old >>$ValidationPath/Webpage/results.html.new
@@ -199,6 +199,9 @@ head -100000000 header.html > index.html
 mv results.html.new results.html
 head -100000000 results.html >> index.html
 head -100000000 footer.html >>index.html
+
+rm results.html.new
+rm results.html.old
 
 git add --all
 git commit -a -m'Travis update'
