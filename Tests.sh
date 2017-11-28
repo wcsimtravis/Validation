@@ -65,6 +65,7 @@ then
     cp $ValidationPath/Webpage/results.html.new $ValidationPath/Webpage/results.html
     mkdir $ValidationPath/Webpage/${TRAVIS_COMMIT}
 
+i=0
    while read line
     do
 
