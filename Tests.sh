@@ -64,8 +64,45 @@ then
     head -300 $ValidationPath/Webpage/results.html.old >>$ValidationPath/Webpage/results.html.new
     cp $ValidationPath/Webpage/results.html.new $ValidationPath/Webpage/results.html
     mkdir $ValidationPath/Webpage/${TRAVIS_COMMIT}
+
+   while read line
+    do
+
+        if [ ${line::1} != "#" ]
+        then
+            i=$(expr 1 + $i)
+	    mkdir $ValidationPath/Webpage/${TRAVIS_COMMIT}/$i
+        fi
+
+    done < $ValidationPath/tests.txt
+
+
+    echo ${TRAVIS_COMMIT} >$ValidationPath/Webpage/folderlist.new
+    head -300 $ValidationPath/Webpage/folderlist >> $ValidationPath/Webpage/folderlist.new
+    mv $ValidationPath/Webpage/folderlist.new $ValidationPath/Webpage/folderlist 
+
+##### clean up ####
+    folder=0
+    while read line
+    do
+	
+        folder=$(expr 1 + $folder)
+	
+        if [ $folder -ge 30 ]
+        then
+            rm -rf $line
+        fi
+	
+    done <  $ValidationPath/Webpage/folderlist
+    
+##################    
     
 fi
+
+
+
+
+
 #########################################################################################
 
 
@@ -156,7 +193,7 @@ do
 		else
 		    time=`more timetest |grep sys |  cut -f2 -d' '`
 		    
-		    $ValidationPath/Compare/compareroot $ValidationPath/Webpage/${TRAVIS_COMMIT}/ "analysed_"$name".root" $var3
+		    $ValidationPath/Compare/compareroot $ValidationPath/Webpage/${TRAVIS_COMMIT}/$1 "analysed_"$name".root" $var3
 		    
 		    
 		    if [ $? -ne 0 ]
@@ -171,7 +208,7 @@ do
 		fi
 		
                 cp $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/index.html: > $ValidationPath/Webpage/results.html.new
+                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/$1/index.html: > $ValidationPath/Webpage/results.html.new
 		
 	    fi
 #############################################################		
