@@ -65,10 +65,10 @@
 
 ## change the name of the output root file, default = wcsim.root
 
-/WCSimIO/RootFile wcsimtest.root
+/WCSimIO/RootFile emtest.root
 
 ## set a timer running on WCSimRunAction
 /WCSimIO/Timer true
 
-/run/beamOn 1000
+/run/beamOn 100
 #exit
