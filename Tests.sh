@@ -16,12 +16,12 @@ ret=0
 if [ $1 -eq 1 ]
 then	    
     
-    mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
+    cp $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
     echo "
             <tr>
             <th scope='col'><div align='center'>Commit ID</div></th>
             <th scope='col'><div align='center'>Description</div></th>
-" >$ValidationPath/Webpage/results.html;
+" >$ValidationPath/Webpage/results.htnl.new;
     
     
     while read line
@@ -31,7 +31,7 @@ then
 	then
 	    
             name=$(echo $line | cut -f1 -d' ')
-	    echo "  <th scope='col'><div align='center'>"$name"</div></th>" >> $ValidationPath/Webpage/results.html;
+	    echo "  <th scope='col'><div align='center'>"$name"</div></th>" >> $ValidationPath/Webpage/results.htnl.new;
 	    
 	fi
 	
@@ -40,7 +40,7 @@ then
     echo " </tr> 
  <tr>
  <td>"${TRAVIS_COMMIT}"</td>
- <td>"${TRAVIS_COMMIT_MESSAGE}"</td>">> $ValidationPath/Webpage/results.html;
+ <td>"${TRAVIS_COMMIT_MESSAGE}"</td>">> $ValidationPath/Webpage/results.htnl.new;
     
     
     i=0
@@ -51,17 +51,17 @@ then
         then
 	    i=$(expr 1 + $i)
             name=$(echo $line | cut -f1 -d' ')
-            echo "  <td bgcolor=\""${TRAVIS_COMMIT}"Pass"$i"\"><a href='"${TRAVIS_COMMIT}"Link"$i"'>"${TRAVIS_COMMIT}"Text"$i$"</td>" >> $ValidationPath/Webpage/results.html;
+            echo "  <td bgcolor=\""${TRAVIS_COMMIT}"Pass"$i"\"><a href='"${TRAVIS_COMMIT}"Link"$i"'>"${TRAVIS_COMMIT}"Text"$i$"</td>" >> $ValidationPath/Webpage/results.htnl.new;
 	    
         fi
 	
     done < $ValidationPath/tests.txt
     
     echo " </tr>
- " >> $ValidationPath/Webpage/results.html
+ " >> $ValidationPath/Webpage/results.htnl.new
 
 
-    head -300 $ValidationPath/Webpage/results.html.old >>$ValidationPath/Webpage/results.html
+    head -300 $ValidationPath/Webpage/results.html.old >>$ValidationPath/Webpage/results.html.new
     
     mkdir $ValidationPath/Webpage/${TRAVIS_COMMIT}
     
@@ -111,8 +111,8 @@ do
 		fi
 		
 		
-		mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-		head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/log$1: > $ValidationPath/Webpage/results.html
+		cp $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
+		head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/log$1: > $ValidationPath/Webpage/results.html.new
 		
 	    fi	
 #############################################################
@@ -135,8 +135,8 @@ do
 		
 		file="index.html"
 		
-                mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$text: | sed s:${TRAVIS_COMMIT}"Link"$1:$file: > $ValidationPath/Webpage/results.html
+                cp $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
+                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$text: | sed s:${TRAVIS_COMMIT}"Link"$1:$file: > $ValidationPath/Webpage/results.html.new
 	    fi
 #############################################################
 		
@@ -170,8 +170,8 @@ do
 		    fi
 		fi
 		
-                mv $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
-                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/index.html: > $ValidationPath/Webpage/results.html
+                cp $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
+                head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/index.html: > $ValidationPath/Webpage/results.html.new
 		
 	    fi
 #############################################################		
@@ -196,6 +196,7 @@ cd $ValidationPath/Webpage
 git pull
 
 head -100000000 header.html > index.html
+mv results.html.new results.html
 head -100000000 results.html >> index.html
 head -100000000 footer.html >>index.html
 
