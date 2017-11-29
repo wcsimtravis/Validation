@@ -80,7 +80,7 @@ i=0
 
 
     echo ${TRAVIS_COMMIT} >$ValidationPath/Webpage/folderlist.new
-    head -300 $ValidationPath/Webpage/folderlist >> $ValidationPath/Webpage/folderlist.new
+    head -35 $ValidationPath/Webpage/folderlist >> $ValidationPath/Webpage/folderlist.new
     mv $ValidationPath/Webpage/folderlist.new $ValidationPath/Webpage/folderlist 
 
 ##### clean up ####
@@ -208,6 +208,10 @@ do
 			ret=0
 		    fi
 		fi
+
+		cd $ValidationPath/Webpage
+		git pull
+		cd -
 		
                 cp $ValidationPath/Webpage/results.html $ValidationPath/Webpage/results.html.old
                 head -1000000 $ValidationPath/Webpage/results.html.old | sed s:${TRAVIS_COMMIT}"Pass"$1:$pass: | sed s:${TRAVIS_COMMIT}"Text"$i:$time: | sed s:${TRAVIS_COMMIT}"Link"$1:${TRAVIS_COMMIT}/$1/index.html: > $ValidationPath/Webpage/results.html.new
